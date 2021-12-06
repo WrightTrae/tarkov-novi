@@ -14,7 +14,7 @@ namespace tarkov_novi.Utils
     {
         public static Data.Item getTarkovItem(string itemName)
         {
-            var request = WebRequest.Create($@"https://tarkov-market.com/api/v1/item?q={itemName}&x-api-key=KrIX88iyD0YfiAYn");
+            var request = WebRequest.Create($@"https://tarkov-market.com/api/v1/item?q={itemName}&x-api-key=kMiLPAauUjr1wopH");
             request.Method = "GET";
 
             using var webResponse = request.GetResponse();

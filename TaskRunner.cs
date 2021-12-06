@@ -21,7 +21,7 @@ namespace tarkov_novi
         {
             mainWindow = main;
             myTimer = new Timer();
-            myTimer.Interval = 1000;
+            myTimer.Interval = 2500;
             myTimer.Elapsed += myTimer_Elapsed;
         }
 

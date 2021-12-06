@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "e/kXD5Thm26NPVVWgVAgcpj56nKMMvSpwBEfdehIv97Hc/YYVmjBXBDoQUJXuZVSQ45UN3bKiorMn6krQ9L3SQ==",
+  "dgSpecHash": "ISHDt9cu9rcZS12peEWQP9U7L42dVOkdAlwjwrZggsUxcvk3I1ehP+K2qhCxjCd6kydWmpgc0IjQYTjBWXVrLA==",
   "success": true,
   "projectFilePath": "C:\\Users\\tdog1\\source\\repos\\tarkov-novi\\tarkov-novi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\tdog1\\.nuget\\packages\\microsoft.netcore.platforms\\5.0.0\\microsoft.netcore.platforms.5.0.0.nupkg.sha512",
+    "C:\\Users\\tdog1\\.nuget\\packages\\microsoft.web.webview2\\1.0.1054.31\\microsoft.web.webview2.1.0.1054.31.nupkg.sha512",
     "C:\\Users\\tdog1\\.nuget\\packages\\microsoft.win32.systemevents\\5.0.0\\microsoft.win32.systemevents.5.0.0.nupkg.sha512",
     "C:\\Users\\tdog1\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
     "C:\\Users\\tdog1\\.nuget\\packages\\system.drawing.common\\5.0.2\\system.drawing.common.5.0.2.nupkg.sha512",

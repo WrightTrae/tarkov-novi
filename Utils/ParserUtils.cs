@@ -6,11 +6,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
+using tarkov_novi.Data;
 
 namespace tarkov_novi.Utils
 {
     static class ParserUtils
     {
+        static Item currentItem;
         public static Data.ParseResults parseData()
         {
             Data.ParseResults parseResults = new Data.ParseResults(null, null, null);
@@ -24,9 +26,9 @@ namespace tarkov_novi.Utils
             {
                 parseResults.windowStatus = "IN_FOCUS";
 
-                Image screenshot = WindowUtils.CaptureWindow(windowHandle);
+                Bitmap screenshot = WindowUtils.CaptureWindow(windowHandle);
                 //var screenshot = Image.FromFile(@"C:\Users\tdog1\source\repos\tarkov-novi\test-assets\test-item.PNG");
-
+                //screenshot.Save("C:\\Users\\tdog1\\source\\repos\\tarkov-novitest-screen.png");
                 var mapName = ParseMapName(screenshot);
                 Debug.WriteLine(mapName);
                 if (mapName != "")
@@ -66,10 +68,14 @@ namespace tarkov_novi.Utils
             List<string> parsedItemName = itemParseResults.Item1;
             float meanConf = itemParseResults.Item2;
             Debug.WriteLine($"Item Parse:: Confidence={meanConf} ParsedValues={String.Join(", ", parsedItemName)}");
-            if (meanConf > .70)
+            if (meanConf > .65 && parsedItemName.Count > 0)
             {
+                if (currentItem != null && currentItem.name != parsedItemName[0][1..])
+                {
+                    return currentItem;
+                }
                 var item = ApiUtils.getTarkovItem(parsedItemName[0][1..]);
-                //item.meanConf = meanConf;
+                currentItem = item;
                 return item;
             }
             else

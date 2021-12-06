@@ -5,5 +5,6 @@
   </PropertyGroup>
   <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
     <Import Project="$(NuGetPackageRoot)tesseract\4.1.1\build\Tesseract.targets" Condition="Exists('$(NuGetPackageRoot)tesseract\4.1.1\build\Tesseract.targets')" />
+    <Import Project="$(NuGetPackageRoot)microsoft.web.webview2\1.0.1054.31\build\Microsoft.Web.WebView2.targets" Condition="Exists('$(NuGetPackageRoot)microsoft.web.webview2\1.0.1054.31\build\Microsoft.Web.WebView2.targets')" />
   </ImportGroup>
 </Project>

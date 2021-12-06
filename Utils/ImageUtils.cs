@@ -88,9 +88,11 @@ namespace tarkov_novi.Utils
                                 {
                                     do
                                     {
-                                        string parsedText = iter.GetText(PageIteratorLevel.TextLine).ToLower();
-                                        if (possibleValues != null)
+                                        string pText = iter.GetText(PageIteratorLevel.TextLine);
+                                        allLines.Add(pText);
+                                        if (possibleValues != null && pText != null)
                                         {
+                                            string parsedText = pText.ToLower();
                                             foreach (string val in possibleValues)
                                             {
                                                 if (parsedText.Contains(val))
@@ -100,14 +102,12 @@ namespace tarkov_novi.Utils
                                             }
                                             return (new List<string> { "" }, meanConf);
                                         }
-                                        allLines.Add(parsedText);
-                                        //Debug.Write(iter.GetText(PageIteratorLevel.Word));
-                                        //Debug.Write(" ");
+                                        Debug.Write(iter.GetText(PageIteratorLevel.TextLine));
 
-                                        //if (iter.IsAtFinalOf(PageIteratorLevel.Para, PageIteratorLevel.TextLine))
-                                        //{
-                                        //    Debug.WriteLine(":: final ::");
-                                        //}
+                                        if (iter.IsAtFinalOf(PageIteratorLevel.Para, PageIteratorLevel.TextLine))
+                                        {
+                                            Debug.WriteLine(":: final ::");
+                                        }
                                     } while (iter.Next(PageIteratorLevel.Para, PageIteratorLevel.TextLine));
                                 } while (iter.Next(PageIteratorLevel.Block, PageIteratorLevel.Para));
                             } while (iter.Next(PageIteratorLevel.Block));
