@@ -61,6 +61,11 @@ namespace tarkov_novi.Data
             get;
             set;
         }
+        public string searchQuery
+        {
+            get;
+            set;
+        }
         public double getPricePerSlot()
         {
             return double.Parse(price) / double.Parse(slots);

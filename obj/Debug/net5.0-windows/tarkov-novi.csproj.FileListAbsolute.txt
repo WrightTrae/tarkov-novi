@@ -38,3 +38,4 @@ C:\Users\tdog1\source\repos\tarkov-novi\bin\Debug\net5.0-windows\runtimes\win-ar
 C:\Users\tdog1\source\repos\tarkov-novi\bin\Debug\net5.0-windows\Microsoft.Web.WebView2.Core.dll
 C:\Users\tdog1\source\repos\tarkov-novi\bin\Debug\net5.0-windows\Microsoft.Web.WebView2.WinForms.dll
 C:\Users\tdog1\source\repos\tarkov-novi\bin\Debug\net5.0-windows\Microsoft.Web.WebView2.Wpf.dll
+C:\Users\tdog1\source\repos\tarkov-novi\obj\Debug\net5.0-windows\GeneratedInternalTypeHelper.g.cs

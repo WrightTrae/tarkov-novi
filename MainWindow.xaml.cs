@@ -18,6 +18,8 @@ using Tesseract;
 using System.Diagnostics;
 using System.Threading;
 using Microsoft.Web.WebView2.Wpf;
+using System.Runtime.InteropServices;
+using tarkov_novi.Utils;
 
 namespace tarkov_novi
 {
@@ -34,6 +36,13 @@ namespace tarkov_novi
             InitializeComponent();
             taskRunner = new TaskRunner(this, PrepareTask);
             taskRunner.Start();
+
+            // need to setup the global hook. this can go in
+            // App.xaml.cs's constructor if you want
+            HotkeysManager.SetupSystemHook();
+            HotkeysManager.AddHotkey(ModifierKeys.Shift, Key.F9, () => { runParserTask(); });
+
+            Closing += MainWindow_Closing;
         }
 
         ParseTask PrepareTask()
@@ -41,8 +50,6 @@ namespace tarkov_novi
             var parser = new ParseTask();
             parser.Notifier += (s, e) => Dispatcher.Invoke(delegate ()
             {
-                Debug.WriteLine("UPDATE UI");
-
                 var windowStatus = e.Args.windowStatus;
                 if (windowStatus == "MINIMIZED")
                 {
@@ -94,7 +101,10 @@ namespace tarkov_novi
                 Label itemPrice = this.FindName("itemPrice") as Label;
                 Label itemAvgPrice = this.FindName("itemAvgPrice") as Label;
                 WebView2 itemBrowser = this.FindName("itemBrowser") as WebView2;
+
+                // Initialize the browser so it can be accessed below
                 itemBrowser.EnsureCoreWebView2Async();
+
                 if (tarkItem == null)
                 {
                     itemGrid.Visibility = Visibility.Collapsed;
@@ -110,7 +120,7 @@ namespace tarkov_novi
                 {
                     itemBrowser.Visibility = Visibility.Visible;
                     itemGrid.Visibility = Visibility.Visible;
-                    if(!urlSet && itemBrowser != null && itemBrowser.CoreWebView2 != null)
+                    if(!urlSet && itemBrowser != null && itemBrowser.CoreWebView2 != null) // check if browser is fully initialized and rendered
                     {
                         urlSet = true;
                         itemBrowser.CoreWebView2.Navigate(tarkItem.wikiLink);
@@ -126,14 +136,33 @@ namespace tarkov_novi
             return parser;
         }
 
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        private void ParseIntervalCheck(object sender, RoutedEventArgs e)
         {
+            string name = ((MenuItem)sender).Name;
+            int milisecs = Int32.Parse(name.Split("_")[1]);
+            taskRunner.setInterval(milisecs);
+        }
 
+        private void disableCheck(object sender, RoutedEventArgs e)
+        {
+            taskRunner.Stop();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Utils.ParserUtils.parseData();
+        }
+
+        private void runParserTask()
+        {
+            taskRunner.runParse();
+        }
+
+        private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            // Need to shutdown the hook. idk what happens if
+            // you dont, but it might cause a memory leak.
+            HotkeysManager.ShutdownSystemHook();
         }
     }
 }

@@ -1,2 +1,3 @@
-2021/12/06-01:51:00.747 94dc Creating DB C:\Users\tdog1\source\repos\tarkov-novi\bin\Debug\net5.0-windows\tarkov-novi.exe.WebView2\EBWebView\Default\data_reduction_proxy_leveldb since it was missing.
-2021/12/06-01:51:00.797 94dc Delete type=3 #1
+2021/12/06-16:29:55.168 a7e4 Recovering log #31
+2021/12/06-16:29:55.176 a7e4 Delete type=0 #31
+2021/12/06-16:29:55.176 a7e4 Delete type=3 #30

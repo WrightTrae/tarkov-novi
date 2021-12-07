@@ -2,10 +2,6 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Media.Imaging;
 using tarkov_novi.Data;
 
 namespace tarkov_novi.Utils
@@ -70,11 +66,16 @@ namespace tarkov_novi.Utils
             Debug.WriteLine($"Item Parse:: Confidence={meanConf} ParsedValues={String.Join(", ", parsedItemName)}");
             if (meanConf > .65 && parsedItemName.Count > 0)
             {
-                if (currentItem != null && currentItem.name != parsedItemName[0][1..])
+                // If the new parsed item name is the same as what iss currently being displayed then return the current item... This saves on API usage
+                if (currentItem != null && currentItem.searchQuery == parsedItemName[0][1..])
                 {
                     return currentItem;
                 }
                 var item = ApiUtils.getTarkovItem(parsedItemName[0][1..]);
+                if(item != null)
+                {
+                    item.searchQuery = parsedItemName[0][1..];
+                }
                 currentItem = item;
                 return item;
             }

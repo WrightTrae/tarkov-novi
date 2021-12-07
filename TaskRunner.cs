@@ -21,7 +21,7 @@ namespace tarkov_novi
         {
             mainWindow = main;
             myTimer = new Timer();
-            myTimer.Interval = 2500;
+            myTimer.Interval = 1500;
             myTimer.Elapsed += myTimer_Elapsed;
         }
 
@@ -41,6 +41,13 @@ namespace tarkov_novi
             isRunning = false;
         }
 
+        public void setInterval(int milisecs)
+        {
+            Stop();
+            myTimer.Interval = milisecs;
+            Start();
+        }
+
         private async void myTimer_Elapsed(object sender, ElapsedEventArgs e)
         {
             if (isRunning) return;
@@ -55,7 +62,23 @@ namespace tarkov_novi
             }
             finally { isRunning = false; }
         }
-        public Task ParseScreen()
+
+        public async void runParse()
+        {
+            if (isRunning) return;
+            isRunning = true;
+            try
+            {
+                await ParseScreen();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
+            finally { isRunning = false; }
+        }
+
+        private Task ParseScreen()
         {
             var parser = prepareTask();
             return Task.Run(() => parser.Parse());
